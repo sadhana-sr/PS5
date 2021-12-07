@@ -91,11 +91,15 @@ function rhymes_output(){
     //check what the input is:
 
     getRhymes(word_input, (result) => {
-        sorted_result = groupBy(result,'numSyllables');
+        const sorted_result = groupBy(result,'numSyllables');
+        const values = Object.values(sorted_result);
+        const grouped_result = values.flat()
+        console.log(values)
+        console.log(grouped_result)
         
-        if (result.length>0){
-            for (a in result){
-                let rhymes = result[a].word;
+        if (grouped_result.length>0){
+            for (a in grouped_result){
+                let rhymes = grouped_result[a].word;
                 saved_words.textContent=''
                 word_output.innerHTML+='<li>'+rhymes+'<button onclick=saveWord("'+rhymes+'") class="btn btn-sm btn-outline-danger save" type="button">(save)</button></li>';
                 output_description.textContent = 'Words that rhyme with '+word_input+':';
@@ -120,11 +124,15 @@ function synonyms_output(){
     output_description = document.getElementById('output_description')
     //check what the input is:
     getSynonyms(word_input, (result) => {
-
-
-        if (result.length>0){
-            for (a in result){
-                let synonyms = result[a].word
+        const sorted_result = groupBy(result,'numSyllables');
+        const values = Object.values(sorted_result);
+        const grouped_result = values.flat()
+        console.log(values)
+        console.log(grouped_result)
+        
+        if (grouped_result.length>0){
+            for (a in grouped_result){
+                let synonyms = grouped_result[a].word;
                 saved_words.textContent=''
                 word_output.innerHTML+='<li>'+synonyms+'<button onclick=saveWord("'+synonyms+'") class="btn btn-sm btn-outline-danger save" type="button">(save)</button></li>';
                 output_description.textContent = 'Words with a meaning similar to '+word_input+':'
